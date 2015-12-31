@@ -3,6 +3,13 @@ package ie.gmit.sw;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/* Name: TextScorer.java 
+ * Author: John Malcolm Anderson
+ * Date: 31/12/2015
+ * Description: Contains getScore & computeLogScore methods for 
+ *  calculating and retrieving score of texts.
+ */
+
 public class TextScorer {
 	private Map<String, Double> map = new ConcurrentHashMap<String, Double>(); 
 	
@@ -10,6 +17,7 @@ public class TextScorer {
 		this.map = m;
 	}
 	
+	// Get Score method
 	public double getScore(String text){
 		double score = 0f;
 
@@ -21,6 +29,7 @@ public class TextScorer {
 		return score;
 	}
 	
+	// Compute Log Score method
 	public double computeLogScore(String quadgram){
 		if (map.containsKey(quadgram)){
 			double frequency = map.get(quadgram);
