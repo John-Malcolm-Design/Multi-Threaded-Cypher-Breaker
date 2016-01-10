@@ -1,14 +1,23 @@
-package ie.gmit.sw;
+package ie.gmit.sw.cryptography;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.*;
+
+import ie.gmit.sw.io.QuadGramMap;
+import ie.gmit.sw.result.ResultConsumer;
+import ie.gmit.sw.result.Resultable;
 
 public class CypherBreaker {
 	private BlockingQueue<Resultable> queue;
 	private int MAX_QUEUE_SIZE = 5;
 	private String cypherText;
 	private Map<String, Double> map;
+
+	public CypherBreaker() {
+		super();
+		init();
+	}
 
 	public void init() {
 		try {

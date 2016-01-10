@@ -1,7 +1,9 @@
-package ie.gmit.sw;
+package ie.gmit.sw.result;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import ie.gmit.sw.io.QuadGramMap;
 
 /* Name: TextScorer.java 
  * Author: John Malcolm Anderson

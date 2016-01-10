@@ -1,4 +1,4 @@
-package ie.gmit.sw;
+package ie.gmit.sw.cryptography;
 
 public class Encryptor {
 	

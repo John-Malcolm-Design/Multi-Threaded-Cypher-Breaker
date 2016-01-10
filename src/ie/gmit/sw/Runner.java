@@ -1,5 +1,9 @@
 package ie.gmit.sw;
 
+import ie.gmit.sw.cryptography.CypherBreaker;
+import ie.gmit.sw.cryptography.Encryptor;
+import ie.gmit.sw.io.FileParser;
+
 /* Name: Runner.java 
  * Author: John Malcolm Anderson
  * Date: 30/12/2015
@@ -22,9 +26,6 @@ public class Runner {
 		
 		// Creates new CypherBreaker object.
 		CypherBreaker cb = new CypherBreaker();
-		
-		// Initialises cypher breaker.
-		cb.init();
 		
 		// Decyphers cypherText
 		cb.decypher(cypherText);
