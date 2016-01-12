@@ -21,7 +21,6 @@ public class QuadGramMap {
 			map.put(stuff[0], Double.parseDouble(stuff[1]));
 		}
 		br.close();
-		
 		return map;
 	}
 	

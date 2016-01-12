@@ -26,5 +26,8 @@ public interface Resultable{
 
 	// Set Score
 	public abstract void setScore(double score);
+	
+	// Comparison method
+	public abstract int compareTo(Resultable o);
 
 }
