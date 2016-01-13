@@ -7,22 +7,39 @@ import ie.gmit.sw.result.Result;
 import ie.gmit.sw.result.Resultable;
 import ie.gmit.sw.result.TextScorer;
 
-/* Name: Decryptor.java
- * Author: John Malcolm Anderson
- * Date: 06/01/2016
- * Description: Decryptor objects are used in brute force decyphering. (run method is a producer)
- *  This works by spawning off several( n/2 ) threads each one with its own unique 
- *  key to use but each with the same cypher text, quadgram map and blocking queue for handling the results.
- *  These resultable objects are handled by the ResultsConsumer class (consumer class). 
- *  This is the producer class which produces resultable objects and adds them to the BlockingQueue. 
+/**
+ * <h1>Decryptor</h1>
+ * Decryptor objects are used in brute force decyphering. (run method is a producer in producer/ consumer model) 
+ * This works by spawning off several( n/2 ) threads each one with its own unique 
+ * key to use but each with the same cypher text, quadgram map and blocking queue for handling the results.
+ * <p>
+ * These resultable objects are handled by the ResultsConsumer class (consumer class). 
+ * This is the producer class which produces resultable objects and adds them to the BlockingQueue. 
+ * 
+ * @author John Malcolm Anderson
+ * @version 1.0
+ * @since 06/01/2016
+ * 
+ * @see ie.gmit.sw.cryptography.CypherBreaker
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html">Runnable</a>
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>
+ * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">Map</a>
+ *
  */
-
 public class Decryptor implements Runnable {
 	private BlockingQueue<Resultable> queue;
 	private String cypherText;
 	private int key;
 	private Map m;
 
+	/**
+	 * Default constructor. 
+	 * 
+	 * @param queue BlockingQueue<Resultable> queue is accessed by multiple threads to store results.
+	 * @param cypherText String to store cypher text. 
+	 * @param key Used for decryption
+	 * @param m Quad Gram Map 
+	 */
 	public Decryptor(BlockingQueue<Resultable> queue, String cypherText, int key, Map m) { // Producer
 		super();
 		this.queue = queue;
