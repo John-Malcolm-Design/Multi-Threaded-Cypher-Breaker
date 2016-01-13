@@ -59,6 +59,7 @@ public class CypherBreaker {
 	 * @param cypherTxt String containing the cypher text.
 	 * @throws InterruptedException Thread error.
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)">ExecutorService.submit(Runnable)</a>
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#shutdown()">ExecutorService.shutdown()</a>
 	 */
 	public void decypher(String cypherTxt) throws InterruptedException{
 		// Init queue and cypher text string.
@@ -73,6 +74,8 @@ public class CypherBreaker {
 			executor.submit(new Decryptor(queue, cypherText, i));
 	
 		}
+		// Initiates an orderly shutdown in which previously submitted tasks are executed, but no new tasks will be accepted. 
+		// Invocation has no additional effect if already shut down.
 		executor.shutdown();
 		
 		// Wait a max of one day. 
