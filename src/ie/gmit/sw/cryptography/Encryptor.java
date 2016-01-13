@@ -1,17 +1,32 @@
 package ie.gmit.sw.cryptography;
 
+/**
+ * <h1>Encryptor</h1>
+ * Rail fence encryption algorithm and print matrix function used for debugging.
+ * 
+ * @author John Malcolm Anderson
+ * @version 1.0
+ * @since 01/01/2016
+ *
+ */
 public class Encryptor {
 	
-	//***** Encrypt a String called cypherText using an integer key ***** 
-	public static String encrypt(String cypherText, int key){
+	/**
+	 * Encrypt a String called cypherText using an integer key
+	 * 
+	 * @param plainText Plain text as String.
+	 * @param key To be used to encrypt (specifies the width of the matrix in the railfence).
+	 * @return String contaning cypher text.
+	 */
+	public static String encrypt(String plainText, int key){
 		//Declare a 2D array of key rows and text length columns
-		char[][] matrix = new char[key][cypherText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
+		char[][] matrix = new char[key][plainText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
 		
 		//Fill the array
 		int row = 0; //Used to keep track of rows
 		boolean down = true; //Used to zigzag
-		for (int i = 0; i < cypherText.length(); i++){ //Loop over the plaintext
-			matrix[row][i] = cypherText.charAt(i); //Add the next character in the plaintext to the array
+		for (int i = 0; i < plainText.length(); i++){ //Loop over the plaintext
+			matrix[row][i] = plainText.charAt(i); //Add the next character in the plaintext to the array
 			
 			if (down){ //If we are moving down the array
 				row++;
@@ -42,7 +57,11 @@ public class Encryptor {
 		return sb.toString(); //Convert the StringBuffer into a String and return it
 	}
 	
-	//***** Output the 2D array in CSV format ***** 
+	/**
+	 * Output the 2D array in CSV format
+	 * 
+	 * @param matrix takes 2D matrix representing the Rail Fence. See skytale for example.
+	 */
 	private static void printMatrix(char[][] matrix){
 		for (int row = 0; row < matrix.length; row++){ //Loop over each row in the matrix
 			for (int col = 0; col < matrix[row].length; col++){ //Loop over each column in the matrix
