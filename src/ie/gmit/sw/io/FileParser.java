@@ -48,13 +48,16 @@ public class FileParser {
 	}
 	
 	/**
+	 * Parses quad gram file from into Map.
 	 * 
-	 * @see ie.gmit.sw.cryptography.
+	 * @see ie.gmit.sw.cryptography.QuadGramMap
 	 */
 	public static void parseQuadGramFile(String file) throws IOException {
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		
 		String next= null;
+		
+		// While the BufferedReader is not null split on spaces and add to Map.
 		while ((next = br.readLine()) != null) {
 			String [] stuff = next.split(" ");
 			QuadGramMap.getMap().put(stuff[0], Double.parseDouble(stuff[1]));
