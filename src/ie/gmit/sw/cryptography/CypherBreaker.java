@@ -2,7 +2,8 @@ package ie.gmit.sw.cryptography;
 
 import java.io.IOException;
 import java.util.concurrent.*;
-import ie.gmit.sw.io.QuadGramMap;
+
+import ie.gmit.sw.io.FileParser;
 import ie.gmit.sw.result.Resultable;
 
 /**
@@ -44,7 +45,7 @@ public class CypherBreaker {
 	public void init() {
 		try {
 			// Init map with 4grams text file.
-			QuadGramMap.parseQuadGramFile("/Users/johnmalcolm/4grams.txt");
+			FileParser.parseQuadGramFile("/Users/johnmalcolm/4grams.txt");
 			System.out.println("4Grams read in successfully");
 		} catch (IOException e1) {
 			e1.printStackTrace();

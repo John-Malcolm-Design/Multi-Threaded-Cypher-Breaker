@@ -5,11 +5,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import ie.gmit.sw.cryptography.QuadGramMap;
+
 /**
  * <h1>FileParser</h1>
  * Contains methods for reading in files and parsing to strings.
  * 
- * @author johnmalcolm
+ * @author John Malcolm Anderson
+ * @version 1.0
+ * @since 01/01/2016
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html">StringBuffer</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a>
  *
@@ -41,6 +45,20 @@ public class FileParser {
 		br.close();
 		
 		return sb.toString();
+	}
+	
+	/**
+	 * 
+	 * @see ie.gmit.sw.cryptography.
+	 */
+	public static void parseQuadGramFile(String file) throws IOException {
+		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		
+		String next= null;
+		while ((next = br.readLine()) != null) {
+			String [] stuff = next.split(" ");
+			QuadGramMap.getMap().put(stuff[0], Double.parseDouble(stuff[1]));
+		}
+		br.close();
 	}
 }
