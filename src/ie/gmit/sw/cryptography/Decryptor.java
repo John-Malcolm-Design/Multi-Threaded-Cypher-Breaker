@@ -1,6 +1,5 @@
 package ie.gmit.sw.cryptography;
 
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 
 import ie.gmit.sw.result.Result;
@@ -9,12 +8,10 @@ import ie.gmit.sw.result.TextScorer;
 
 /**
  * <h1>Decryptor</h1>
- * Decryptor objects are used in brute force decyphering. (run method is a producer in producer/ consumer model) 
+ * Decryptor objects are used in brute force decyphering. 
  * This works by spawning off several( n/2 ) threads each one with its own unique 
  * key to use but each with the same cypher text, quadgram map and blocking queue for handling the results.
  * <p>
- * These resultable objects are handled by the ResultsConsumer class (consumer class). 
- * This is the producer class which produces resultable objects and adds them to the BlockingQueue. 
  * 
  * @author John Malcolm Anderson
  * @version 1.0
@@ -23,7 +20,6 @@ import ie.gmit.sw.result.TextScorer;
  * @see ie.gmit.sw.cryptography.CypherBreaker
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html">Runnable</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>
- * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">Map</a>
  *
  */
 public class Decryptor implements Runnable {
@@ -34,10 +30,9 @@ public class Decryptor implements Runnable {
 	/**
 	 * Default constructor. 
 	 * 
-	 * @param queue BlockingQueue<Resultable> queue is accessed by multiple threads to store results.
+	 * @param queue Concurrent queue is accessed by multiple threads to store results.
 	 * @param cypherText String to store cypher text. 
 	 * @param key Used for decryption
-	 * @param m Quad Gram Map 
 	 */
 	public Decryptor(BlockingQueue<Resultable> queue, String cypherText, int key) { // Producer
 		super();
@@ -46,15 +41,25 @@ public class Decryptor implements Runnable {
 		this.key = key;
 	}
 	
+	/**
+	 * Decrypts cypher text, gets score and puts result object into the result queue. 
+	 * 
+	 * @see ie.gmit.sw.cryptography.Decryptor#decrypt(String, int)
+	 * @see ie.gmit.sw.result.TextScorer#getScore(String)
+	 * @see ie.gmit.sw.result.Result
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html#run()">Runnable.run()</a>
+	 */
 	public void run(){
+		// Decrypt cypher text and with key and store results in string
 		String plainText = decrypt(cypherText, key);
 		
-		TextScorer score = new TextScorer();
+		// Calculate & store the score in a variable	
+		double textScore = TextScorer.getScore(plainText);
 		
-		double testScore = score.getScore(plainText);
-		
-		Resultable r = new Result(plainText, this.key, testScore);
+		// Pass score key and text into Resultable object
+		Resultable r = new Result(plainText, this.key, textScore);
 
+		// Add result to the PriorityBlockingQueue
 		try {
 			queue.put(r);
 		} catch (InterruptedException e) {
@@ -63,7 +68,14 @@ public class Decryptor implements Runnable {
 		}
 	}
 	
-	//***** Decrypt a String cypherText using an integer key ***** 
+	/**
+	 * Decrypt a String cypherText using an integer key.
+	 * 
+	 * @param cypherText The cyphertext that is to be decrypted.
+	 * @param key The key used for decryption.
+	 * @return Plain text. This is the decrypted text and not necessarily correct as it depends on the key.
+	 * 
+	 */
 	public String decrypt(String cypherText, int key){
 		//Declare a 2D array of key rows and text length columns
 		char[][] matrix = new char[key][cypherText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
@@ -98,9 +110,7 @@ public class Decryptor implements Runnable {
 
 			targetRow++;
 		}while (targetRow < matrix.length);
-		
-		// printMatrix(matrix); //Output the matrix (debug)
-		
+				
 		//Extract the cypher text
 		StringBuffer sb = new StringBuffer(); //A string buffer allows a string to be built efficiently
 		int row = 0;

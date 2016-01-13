@@ -1,8 +1,5 @@
 package ie.gmit.sw.result;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import ie.gmit.sw.io.QuadGramMap;
 
 /* Name: TextScorer.java 
@@ -18,7 +15,7 @@ public class TextScorer {
 	}
 	
 	// Get Score method
-	public double getScore(String text){
+	public static double getScore(String text){
 		double score = 0f;
 
 		for (int i = 0; i < text.length(); i++){
@@ -30,7 +27,7 @@ public class TextScorer {
 	}
 	
 	// Compute Log Score method
-	public double computeLogScore(String quadgram){
+	public static double computeLogScore(String quadgram){
 		if (QuadGramMap.getMap().containsKey(quadgram)){
 			double frequency = QuadGramMap.getMap().get(quadgram);
 			double total = (double) QuadGramMap.getMap().size();

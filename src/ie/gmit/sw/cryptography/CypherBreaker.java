@@ -1,7 +1,6 @@
 package ie.gmit.sw.cryptography;
 
 import java.io.IOException;
-import java.util.*;
 import java.util.concurrent.*;
 import ie.gmit.sw.io.QuadGramMap;
 import ie.gmit.sw.result.Resultable;
@@ -22,7 +21,6 @@ import ie.gmit.sw.result.Resultable;
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/PriorityBlockingQueue.html">PriorityBlockingQueue</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html">Executors</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</a>
- * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">Map</a>
  *
  */
 public class CypherBreaker {
