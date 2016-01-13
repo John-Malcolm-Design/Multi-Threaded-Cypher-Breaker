@@ -2,22 +2,27 @@ package ie.gmit.sw.result;
 
 import ie.gmit.sw.io.QuadGramMap;
 
-/* Name: TextScorer.java 
- * Author: John Malcolm Anderson
- * Date: 31/12/2015
- * Description: Contains getScore & computeLogScore methods for 
- *  calculating and retrieving score of texts.
+/**
+ * <h1>TextScorer</h1>
+ * Calculate and retrieve the score of texts.
+ * 
+ * @author John Malcolm Anderson
+ * @version 1.0
+ * @since 01/01/2016
+ *
  */
-
 public class TextScorer {
 	
-	public TextScorer(){
-	}
-	
-	// Get Score method
+	/**
+	 * Returns score based on the Quad Gram map by comparing and scoring 4 char long segments.
+	 *  
+	 * @param text decyphered text.
+	 * @return Cumulative score for decyphered text.
+	 */
 	public static double getScore(String text){
 		double score = 0f;
 
+		// For the length of the text score each 4 char segment.
 		for (int i = 0; i < text.length(); i++){
 			if (i + QuadGramMap.getGramSize() <= text.length() -1){
 				score += computeLogScore(text.substring(i, i + QuadGramMap.getGramSize()));
@@ -26,7 +31,12 @@ public class TextScorer {
 		return score;
 	}
 	
-	// Compute Log Score method
+	/**
+	 * Compute the score for each 4 char segment based on the quad gram map.
+	 * 
+	 * @param quadgram 4 char segment to score.
+	 * @return score as a double.
+	 */
 	public static double computeLogScore(String quadgram){
 		if (QuadGramMap.getMap().containsKey(quadgram)){
 			double frequency = QuadGramMap.getMap().get(quadgram);
