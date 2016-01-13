@@ -1,33 +1,64 @@
 package ie.gmit.sw.result;
 
-/* Name: Resultable.java <<Interface>>
- * Author: John Malcolm Anderson
- * Date: 06/01/2016
- * Description: Specifies methods common to all Result type objects
- *  that inherit from this class. These are getters/ setters for key, score & plain text.
+/**
+ * <h1>Resultable</h1>
+ * Interface specifies methods common to all Result type objects
+ * that inherit from this class. These are getters/ setters for key, score and plain text.
+ * 
+ * @author John Malcolm Anderson
+ * @since 01/01/2016
+ * @version 1.0
+ * 
+ * @see ie.gmit.sw.result.Result
+ * @see ie.gmit.sw.result.ResultConsumer
+ *
  */
-
 public interface Resultable{
 
-	// Get plain text method
+	/**
+	 * Get plain text.
+	 * @return Plain text/decyphered text.
+	 */
 	public abstract String getPlainText();
 
-	// Set plain text method
+	/**
+	 * Set the plain text/decyphered text.
+	 * @param plainText Plain Text.
+	 */
 	public abstract void setPlainText(String plainText);
 
-	// Get Key
+	/**
+	 * Get the key used for decryption.
+	 * @return Returns key.
+	 */
 	public abstract int getKey();
 
-	// Set Key
+	/**
+	 * Set the key.
+	 * @param key Key used for decryption.
+	 */
 	public abstract void setKey(int key);
 
-	// Get Score
+	/**
+	 * Get plain text.
+	 * @return Plain text/decyphered text.
+	 */
 	public abstract double getScore();
 
-	// Set Score
+	/**
+	 * Set the key.
+	 * @param score Score given to decyphered text based on the TextScorer.
+	 * @see ie.gmit.sw.result.TextScorer
+	 */
 	public abstract void setScore(double score);
 	
-	// Comparison method
+	/**
+	 * Comparison method needed for sorting.
+	 * 
+	 * @param o Restulable object to compare to.
+	 * @return int containing 1 if greater than, 0 if equal and -1 if less than.
+	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Comparable.html#compareTo(T)">Comparable.compareTo()</a>
+	 */
 	public abstract int compareTo(Resultable o);
 
 }

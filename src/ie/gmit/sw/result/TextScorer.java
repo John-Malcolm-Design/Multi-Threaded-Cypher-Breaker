@@ -1,7 +1,5 @@
 package ie.gmit.sw.result;
 
-import ie.gmit.sw.cryptography.QuadGramMap;
-
 /**
  * <h1>TextScorer</h1>
  * Calculate and retrieve the score of texts.

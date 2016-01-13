@@ -1,4 +1,4 @@
-package ie.gmit.sw.cryptography;
+package ie.gmit.sw.result;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,9 @@ import java.util.Map;
  * 
  * @author John Malcolm Anderson
  * @version 1.0
- * @since 01/01/2016 *
+ * @since 01/01/2016
+ * 
+ * @see ie.gmit.sw.io.FileParser
  */
 public class QuadGramMap {
 	private static Map<String, Double> map = new HashMap<String, Double>();

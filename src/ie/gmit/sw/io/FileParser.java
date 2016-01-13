@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ie.gmit.sw.cryptography.QuadGramMap;
+import ie.gmit.sw.result.QuadGramMap;
 
 /**
  * <h1>FileParser</h1>
@@ -50,7 +50,9 @@ public class FileParser {
 	/**
 	 * Parses quad gram file from into Map.
 	 * 
-	 * @see ie.gmit.sw.cryptography.QuadGramMap
+	 * @param file  containing URI for n-gram file.
+	 * @throws IOException Regular IOException.
+	 * @see ie.gmit.sw.result.QuadGramMap
 	 */
 	public static void parseQuadGramFile(String file) throws IOException {
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
