@@ -76,7 +76,7 @@ public class Decryptor implements Runnable {
 	 * @return Plain text. This is the decrypted text and not necessarily correct as it depends on the key.
 	 * 
 	 */
-	public String decrypt(String cypherText, int key){
+	public static String decrypt(String cypherText, int key){
 		//Declare a 2D array of key rows and text length columns
 		char[][] matrix = new char[key][cypherText.length()]; //The array is filled with chars with initial values of zero, i.e. '0'.
 		

@@ -1,9 +1,11 @@
 package ie.gmit.sw.io;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import ie.gmit.sw.result.QuadGramMap;
 
@@ -18,8 +20,8 @@ import ie.gmit.sw.result.QuadGramMap;
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a>
  *
  */
-public class FileParser { 
-	
+public class FileIO { 
+
 	/**
 	 * Parse plain text file into a string using the StringBuffer and BufferedReader.
 	 * 
@@ -33,9 +35,9 @@ public class FileParser {
 		// Initialize and instantiate files.
 		StringBuffer sb = new StringBuffer();
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		
+
 		String line = null;
-		
+
 		// While the Buffered Reader is not null read and append to StringBuffer.
 		while ((line = br.readLine()) != null) {
 			/* Regex is used via the String class for data sanitizing. All characters that are 
@@ -43,10 +45,10 @@ public class FileParser {
 			sb.append(line.replaceAll("[^a-zA-Z]+", "").toUpperCase());
 		}
 		br.close();
-		
+
 		return sb.toString();
 	}
-	
+
 	/**
 	 * Parses quad gram file from into Map.
 	 * 
@@ -56,14 +58,48 @@ public class FileParser {
 	 */
 	public static void parseQuadGramFile(String file) throws IOException {
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		
+
 		String next= null;
-		
+
 		// While the BufferedReader is not null split on spaces and add to Map.
 		while ((next = br.readLine()) != null) {
 			String [] stuff = next.split(" ");
 			QuadGramMap.getMap().put(stuff[0], Double.parseDouble(stuff[1]));
 		}
 		br.close();
+	}
+
+	public static String checkFileExists(){
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		boolean validFile;
+		File f = null;
+		String fileURL;
+
+		do {
+			// Resets flag
+			validFile = true;
+
+			// Promps for file url
+			System.out.println("Please enter the file URI.");
+			fileURL = scanner.nextLine();
+
+			f = new File(fileURL);
+
+			// Checks too see if file url provided can be used in as a file input stream
+			try {
+				@SuppressWarnings({ "unused", "resource" })
+				BufferedReader testBr = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+			} catch (Exception e) {
+				validFile = false;
+			}
+
+			// Tells user that the file url provided is invalid
+			if (validFile == false) {
+				System.out.println("Invalid file url. Try again.");
+			}
+			// Keeps looping until user enters a valid file url
+		} while (validFile == false);
+		return fileURL;
 	}
 }

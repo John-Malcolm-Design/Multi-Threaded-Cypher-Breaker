@@ -12,7 +12,7 @@ import java.util.Map;
  * @version 1.0
  * @since 01/01/2016
  * 
- * @see ie.gmit.sw.io.FileParser
+ * @see ie.gmit.sw.io.FileIO
  */
 public class QuadGramMap {
 	private static Map<String, Double> map = new HashMap<String, Double>();
