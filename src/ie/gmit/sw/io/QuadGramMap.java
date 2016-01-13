@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class QuadGramMap {
-	public static final int GRAM_SIZE = 4;
+	private static Map<String, Double> map = new HashMap<String, Double>();
+	private static final int GRAM_SIZE = 4;
 	
 	// Return ordinary hash map to consturctor of conncurent hash map
-	public static Map<String, Double> parseQuadGramFile(String file) throws IOException {
-		Map<String, Double> map = new HashMap<String, Double>();
+	public static void parseQuadGramFile(String file) throws IOException {
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 		
 		String next= null;
@@ -21,8 +21,20 @@ public class QuadGramMap {
 			map.put(stuff[0], Double.parseDouble(stuff[1]));
 		}
 		br.close();
+	}
+
+	public static Map<String, Double> getMap() {
 		return map;
 	}
 	
+
+	public static void setMap(Map<String, Double> map) {
+		QuadGramMap.map = map;
+	}
+	
+
+	public static int getGramSize() {
+		return GRAM_SIZE;
+	}
 
 }

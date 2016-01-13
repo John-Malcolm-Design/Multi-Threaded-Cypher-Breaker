@@ -30,7 +30,6 @@ public class Decryptor implements Runnable {
 	private BlockingQueue<Resultable> queue;
 	private String cypherText;
 	private int key;
-	private Map m;
 
 	/**
 	 * Default constructor. 
@@ -40,18 +39,17 @@ public class Decryptor implements Runnable {
 	 * @param key Used for decryption
 	 * @param m Quad Gram Map 
 	 */
-	public Decryptor(BlockingQueue<Resultable> queue, String cypherText, int key, Map m) { // Producer
+	public Decryptor(BlockingQueue<Resultable> queue, String cypherText, int key) { // Producer
 		super();
 		this.queue = queue;
 		this.cypherText = cypherText;
 		this.key = key;
-		this.m = m;
 	}
 	
 	public void run(){
 		String plainText = decrypt(cypherText, key);
 		
-		TextScorer score = new TextScorer(m);
+		TextScorer score = new TextScorer();
 		
 		double testScore = score.getScore(plainText);
 		

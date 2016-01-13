@@ -13,10 +13,8 @@ import ie.gmit.sw.io.QuadGramMap;
  */
 
 public class TextScorer {
-	private Map<String, Double> map = new ConcurrentHashMap<String, Double>(); 
 	
-	public TextScorer(Map<String, Double> m){
-		this.map = m;
+	public TextScorer(){
 	}
 	
 	// Get Score method
@@ -24,8 +22,8 @@ public class TextScorer {
 		double score = 0f;
 
 		for (int i = 0; i < text.length(); i++){
-			if (i + QuadGramMap.GRAM_SIZE <= text.length() -1){
-				score += computeLogScore(text.substring(i, i + QuadGramMap.GRAM_SIZE));
+			if (i + QuadGramMap.getGramSize() <= text.length() -1){
+				score += computeLogScore(text.substring(i, i + QuadGramMap.getGramSize()));
 			}
 		}
 		return score;
@@ -33,9 +31,9 @@ public class TextScorer {
 	
 	// Compute Log Score method
 	public double computeLogScore(String quadgram){
-		if (map.containsKey(quadgram)){
-			double frequency = map.get(quadgram);
-			double total = (double) map.size();
+		if (QuadGramMap.getMap().containsKey(quadgram)){
+			double frequency = QuadGramMap.getMap().get(quadgram);
+			double total = (double) QuadGramMap.getMap().size();
 			double probability = (double) (frequency/total);
 			
 			return Math.log10(probability);

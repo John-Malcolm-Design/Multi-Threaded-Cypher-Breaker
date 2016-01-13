@@ -29,7 +29,6 @@ public class CypherBreaker {
 	private BlockingQueue<Resultable> queue;
 	private int MAX_QUEUE_SIZE = 5;
 	private String cypherText;
-	private Map<String, Double> map;
 
 	/**
 	 * Default constructor that calls the init() function.
@@ -47,7 +46,7 @@ public class CypherBreaker {
 	public void init() {
 		try {
 			// Init map with 4grams text file.
-			map = QuadGramMap.parseQuadGramFile("/Users/johnmalcolm/4grams.txt");
+			QuadGramMap.parseQuadGramFile("/Users/johnmalcolm/4grams.txt");
 			System.out.println("4Grams read in successfully");
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -72,7 +71,7 @@ public class CypherBreaker {
 		
 		// Submit Decryptor runnable classes to the threads in the pool and then shutdown the executor.
 		for(int i = 2; i < cypherText.length()/2; i++){
-			executor.submit(new Decryptor(queue, cypherText, i, map));
+			executor.submit(new Decryptor(queue, cypherText, i));
 	
 		}
 		executor.shutdown();
