@@ -34,8 +34,8 @@
 	<path id="classpath">
     	<pathelement location="." />
 		<pathelement location="${build.tests}"/>
-		<pathelement location="${test.dir}lib/junit-4.12.jar"/>
-		<pathelement location="${test.dir}lib/hamcrest-core-1.3.jar"/>
+		<pathelement location="lib/junit-4.12.jar"/>
+		<pathelement location="lib/hamcrest-core-1.3.jar"/>
   	</path>
 		
 	
@@ -66,7 +66,8 @@
 
 	<!-- Compile source code -->
 	<target name="compile" depends="init">
-		<javac target="${jre.target}" source="${jre.target}" srcdir="${src.dir}" destdir="${dist.dir}">
+		<javac target="${jre.target}" source="${jre.target}" srcdir="${src.dir}" destdir="${dist.dir}" includeantruntime="false">
+			<compilerarg value="-Xlint:-options"/>
 		    <classpath refid="classpath" />
 		</javac>
 	</target>
@@ -100,9 +101,9 @@
 		
     <target name="junit" depends="compile">
     	<mkdir dir="${test.dir}reports"/>
-    	
-		<javac target="${jre.target}" source="${jre.target}" srcdir="${test.dir}" destdir="${dist.dir}">
+		<javac target="${jre.target}" source="${jre.target}" srcdir="${test.dir}" destdir="${dist.dir}" includeantruntime="false">
 		    <classpath refid="classpath" />
+			<compilerarg value="-Xlint:-options"/>
 		</javac>
     	
         <junit printsummary="yes" haltonfailure="yes">
