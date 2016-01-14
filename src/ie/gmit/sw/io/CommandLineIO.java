@@ -91,7 +91,7 @@ public class CommandLineIO {
 					case "no":
 						
 						// Parses the users file plain text and passes text to String called plainText.
-						String cypherText2 = FileIO.parseTextFile(getAndCheckFile());
+						String cypherText2 = FileIO.parseTextFile(getAndCheckUserFile());
 
 						System.out.println("Please enter the key");
 						int keyLastEncrypt2 = console.nextInt();
@@ -135,7 +135,7 @@ public class CommandLineIO {
 						case "1":
 
 							// Parses the users file plain text and passes text to String called plainText.
-							String cypherTextBreaker = FileIO.parseTextFile(getAndCheckFile());
+							String cypherTextBreaker = FileIO.parseTextFile(getAndCheckUserFile());
 
 							// Creates new CypherBreaker object.
 							CypherBreaker cb2 = new CypherBreaker();
@@ -188,7 +188,7 @@ public class CommandLineIO {
 		console.close();
 	} 
 	
-	private static String getAndCheckFile(){
+	private static String getAndCheckUserFile(){
 		boolean validFile;
 		String fileURI;
 

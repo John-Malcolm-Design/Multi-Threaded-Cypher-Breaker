@@ -3,14 +3,14 @@ package ie.gmit.sw.result;
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
-import java.util.Map;
+
 
 import org.junit.Before;
 import org.junit.Test;
 
 import ie.gmit.sw.io.FileIO;
 
-public class TestQuadGramMap {
+public class QuadGramMapTest {
 	
 	@Before
 	public void before(){

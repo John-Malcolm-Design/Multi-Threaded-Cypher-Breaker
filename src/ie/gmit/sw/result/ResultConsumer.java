@@ -1,6 +1,6 @@
 package ie.gmit.sw.result;
 
-import java.util.concurrent.PriorityBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 /**
  * <h1>ResultConsumer</h1>
@@ -20,12 +20,25 @@ import java.util.concurrent.PriorityBlockingQueue;
  */
 public class ResultConsumer implements Runnable {
 	
-	private PriorityBlockingQueue<Resultable> queue;
+	private BlockingQueue<Resultable> queue;
+	private double topScore= -99999999.999;
+	private Resultable topResult = null;
 
 	@Deprecated
-	public ResultConsumer(PriorityBlockingQueue<Resultable> q){
+	public ResultConsumer(BlockingQueue<Resultable> q){
 		this.queue = q;
 	}
+
+	public Resultable getTopResult() {
+		return topResult;
+	}
+
+	public void setTopResult(Resultable topResult) {
+		this.topResult = topResult;
+	}
+	
+
+
 
 	/**
 	 * While the queue is not empty it will take a result object with a score greater than -2000 
@@ -36,19 +49,24 @@ public class ResultConsumer implements Runnable {
 	public void run() {
 		Resultable r = null;
 		
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		// Run while the Queue is not empty
 		while(!queue.isEmpty()){
 			try {
 				r = queue.take();
-				if (r.getScore() > -2000) {
-					// Print resutl to screen if score is over 2000
-					// Arbitrary score is not scalable. Should be avoided.
-					System.out.println(r.getScore() + "; " + r.getKey() + "; " + r.getPlainText());
+				if (r.getScore() > topScore) {
+					topScore = r.getScore();
+					topResult = r;
 				}
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				// Alert user of error.
-				System.out.println("IO Error - sorry try again");
+				System.out.println("Intperrupt - sorry try again");
 			}
 		}
 	}

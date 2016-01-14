@@ -35,7 +35,7 @@ public class TextScorer {
 	 * @param quadgram 4 char segment to score.
 	 * @return score as a double.
 	 */
-	public static double computeLogScore(String quadgram){
+	private static double computeLogScore(String quadgram){
 		if (QuadGramMap.getMap().containsKey(quadgram)){
 			double frequency = QuadGramMap.getMap().get(quadgram);
 			double total = (double) QuadGramMap.getMap().size();
