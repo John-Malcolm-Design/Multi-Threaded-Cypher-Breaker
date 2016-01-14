@@ -31,7 +31,7 @@ public class FileIO {
 	 * 
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#replaceAll(java.lang.String,%20java.lang.String)">String.replaceAll()</a>
 	 */
-	public static String parsePlainText(String file) throws IOException{
+	public static String parseTextFile(String file) throws IOException{
 		// Initialize and instantiate files.
 		StringBuffer sb = new StringBuffer();
 		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));

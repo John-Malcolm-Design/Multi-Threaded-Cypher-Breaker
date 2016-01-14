@@ -3,6 +3,7 @@ package ie.gmit.sw.io;
 import java.io.IOException;
 import java.util.Scanner;
 
+import ie.gmit.sw.cryptography.CypherBreaker;
 import ie.gmit.sw.cryptography.Decryptor;
 import ie.gmit.sw.cryptography.Encryptor;
 
@@ -10,14 +11,14 @@ public class CommandLineInput {
 	private static Scanner console = new Scanner(System.in);
 	private static String cypherText;
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		System.out.printf("%s","\n   *** Welcome to the RailFence cypher ***\n\n");
 		String userChoice = null;
 		do {
 			System.out.println("Please choose from one of the following options:");
 			System.out.println("1 = Encrypt using key");
 			System.out.println("2 = Decrypt using key");
-			System.out.println("3 = Decypher file without key");
+			System.out.println("3 = Decypher without key using the Cypher Breaker");
 			System.out.println("4 = Exit Program");
 			userChoice = console.nextLine();
 
@@ -30,7 +31,7 @@ public class CommandLineInput {
 					String fileURI = FileIO.checkFileExists();
 
 					// Parses the users file plain text and passes text to String called plainText.
-					String plainText1 = FileIO.parsePlainText(fileURI);
+					String plainText1 = FileIO.parseTextFile(fileURI);
 
 					// Encrypts using plainText string and specified key lenght as six. 
 					cypherText = Encryptor.encrypt(plainText1, keyInput(plainText1.length()));
@@ -43,11 +44,9 @@ public class CommandLineInput {
 					String plainText2 = console.nextLine();
 
 					// Encrypts using plainText string and specified key lenght as six. 
-					cypherText = Encryptor.encrypt(plainText2, keyInput(plainText2.length()));
+					cypherText = Encryptor.encrypt(plainText2.replaceAll("[^a-zA-Z]+", "").toUpperCase(), keyInput(plainText2.length()));
 					System.out.println("Cypher text = " + cypherText + "\n");
 
-					// Encrypts using plainText string and specified key lenght as six. 
-					cypherText = Encryptor.encrypt(plainText2, keyInput(plainText2.length()));
 					break;
 
 				default:
@@ -56,21 +55,35 @@ public class CommandLineInput {
 				}
 				break;
 			case "2":
-				if (!cypherText.isEmpty()) {
 					System.out.println("Would you like to decrypt the cypher text from last encryption? (yes/no)");
 					String lastEncryptChoice = null;
 					do {
 						lastEncryptChoice = console.nextLine();
 						switch (lastEncryptChoice) {
 						case "yes":
+							if (cypherText == null) {
+								System.out.println("Sorry there is no cypher text from last encryption.");
+								break;
+							}
 							System.out.println("Please enter the key");
 							int keyLastEncrypt = console.nextInt();
+							console.nextLine();
 							String plainText = Decryptor.decrypt(cypherText, keyLastEncrypt);
-							System.out.println("Decrypted Text: " + plainText + "\n");
+							System.out.println("Decrypted text = " + plainText + "\n");
 							break;
 
 						case "no":
-							System.out.println("Please enter the file URI for the cypher text.");
+							String fileURI = FileIO.checkFileExists();
+
+							// Parses the users file plain text and passes text to String called plainText.
+							String cypherText2 = FileIO.parseTextFile(fileURI);
+							
+							System.out.println("Please enter the key");
+							int keyLastEncrypt2 = console.nextInt();
+							console.nextLine();							
+							String plainText2 = Decryptor.decrypt(cypherText2, keyLastEncrypt2);
+							System.out.println("Decrypted text = " + plainText2 + "\n");
+							
 							break;
 
 						default:
@@ -79,20 +92,81 @@ public class CommandLineInput {
 							break;
 						}
 					} while (lastEncryptChoice == null);
-				}
 				break;
 			case "3":
-				System.out.println("3");
+				System.out.println("Would you like to decrypt the cypher text from last encryption? (yes/no)");
+				String lastChoice = null;
+				do {
+					lastChoice = console.nextLine();
+					switch (lastChoice) {
+					case "yes":
+						// Creates new CypherBreaker object.
+						CypherBreaker cb = new CypherBreaker();
+						
+						// Decyphers cypherText
+						cb.decypher(cypherText);
+						System.out.println("Decyphered text = " + cb.getQueue().peek().getPlainText());
+						System.out.println("Key = " + cb.getQueue().peek().getKey() + "\n");
+						break;
+
+					case "no":
+						System.out.println("Would you like to (1) decypher a text file or (2) decypher text via the keyboard?");
+						String textOrFileChoice2 = console.nextLine();
+						switch (textOrFileChoice2) {
+						case "1":
+							String fileURI = FileIO.checkFileExists();
+							
+							// Parses the users file plain text and passes text to String called plainText.
+							String cypherTextBreaker = FileIO.parseTextFile(fileURI);
+
+							// Creates new CypherBreaker object.
+							CypherBreaker cb2 = new CypherBreaker();
+							
+							// Decyphers cypherText
+							cb2.decypher(cypherTextBreaker);
+							System.out.println("Decyphered text = " + cb2.getQueue().peek().getPlainText());
+							System.out.println("Key = " + cb2.getQueue().peek().getKey() + "\n");
+							break;
+
+						case "2":
+							System.out.println("Please enter the message you would like to decrypt.");
+							String plainText2 = console.nextLine();
+
+							// Creates new CypherBreaker object.
+							CypherBreaker cb3 = new CypherBreaker();
+							
+							// Decyphers cypherText
+							cb3.decypher(plainText2);
+							System.out.println("Decyphered text = " + cb3.getQueue().peek().getPlainText());
+							System.out.println("Key = " + cb3.getQueue().peek().getKey() + "\n");
+							break;
+
+						default:
+							System.out.println(textOrFileChoice2 + " is not a valid option. Please try again.");
+							break;
+						}
+						break;
+
+					default:
+						System.out.println("That is not a valid option. Please choose either \"yes\" or \"no\"");
+						lastChoice = null;
+						break;
+					}
+				} while (lastChoice == null);
+			
 				break;
 			case "4":
-				userChoice = "";
+				userChoice = null;
 				break;
 
 			default:
 				System.out.println("That is not a valid option. Try again...");
+				userChoice = "Try Again";
 				break;
 			}
-		}while (!userChoice.isEmpty());
+		}while (!(userChoice == null));
+		
+		System.out.println("Bye. CSSBUNMTPRRORCINAOPTAAOYUTOEEWTAMEIEOEUMEHSNIOECSGDSPTECMRTORTTOSBLSESIKUNOCSRAEDJ");
 		console.close();
 	} 
 
@@ -105,17 +179,16 @@ public class CommandLineInput {
 			console.nextLine();
 
 			if (key > (plainTextLenght / 2) - 1) {
-				System.out.println("Sorry that key is too large!");
-				System.out.println("Try something smaller than " + (plainTextLenght /2));
+				System.out.println("Sorry that key is too large. Try something smaller than " + (plainTextLenght /2));
 				key = 0;
 			} else if (key < 3){
-				System.out.println("Sorry that key is too small. Try something larger than 2");
+				System.out.println("Sorry that key is too small. Try something larger than 2.");
 				key = 0;
 			} else {
 				return key;
 			}
 		} while (key == 0);
 
-		return 0;
+		return key;
 	}
 }

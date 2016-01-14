@@ -30,7 +30,7 @@ public class Runner {
 	 */
 	public static void main(String[] args) throws Exception{
 		// Parses the introduction to "War & Peace" plain text and passes text to String called plainText.
-		String plainText = FileIO.parsePlainText("./wp-intro.txt");
+		String plainText = FileIO.parseTextFile("./wp-intro.txt");
 				
 		// Encrypts using plainText string and specified key lenght as six. 
 		String cypherText = Encryptor.encrypt(plainText, 6);

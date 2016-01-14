@@ -38,9 +38,13 @@ public class CypherBreaker {
 		init();
 	}
 
+	public BlockingQueue<Resultable> getQueue() {
+		return queue;
+	}
+	
 	/**
 	 * Initializes the Quad Gram Map (4 char long english n-gram ) which can be used for scoring decrypted text.
-	 * @see ie.gmit.sw.io.FileIO#parsePlainText(String)
+	 * @see ie.gmit.sw.io.FileIO#parseTextFile(String)
 	 */
 	public void init() {
 		try {
