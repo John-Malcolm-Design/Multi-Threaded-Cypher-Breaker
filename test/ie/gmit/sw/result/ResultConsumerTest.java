@@ -24,7 +24,7 @@ public class ResultConsumerTest {
 		queue = new ArrayBlockingQueue<Resultable>(7);
 		rc = new ResultConsumer(queue);
 		
-		FileIO.parseQuadGramFile("./4grams.txt");
+		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
          
 		// These threads act as the producer, producing result objects and putting them on the queue.
         for(int i = 2; i < cypherText.length()/2; i++){

@@ -1,7 +1,6 @@
 package ie.gmit.sw.result;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class ResultTest {

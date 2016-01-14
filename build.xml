@@ -72,7 +72,7 @@
 	</target>
 
 	<!-- Create Java application archive (Jar) -->
-	<target name="archive" depends="compile">
+	<target name="archive" depends="junit">
         <jar destfile="${dist.dir}/railfence.jar" basedir="${dist.dir}" excludes="**/*Test.class, **/Compact*.class">         
         	 <manifest>
         	 	<attribute name="Main-Class" value="ie.gmit.sw.Runner"/>
@@ -100,7 +100,6 @@
 		
     <target name="junit" depends="compile">
     	<mkdir dir="${test.dir}reports"/>
-    	<mkdir dir="${test.dir}bin"/>
     	
 		<javac target="${jre.target}" source="${jre.target}" srcdir="${test.dir}" destdir="${dist.dir}">
 		    <classpath refid="classpath" />

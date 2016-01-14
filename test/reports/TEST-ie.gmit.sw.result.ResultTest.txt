@@ -1,6 +1,6 @@
 Testsuite: ie.gmit.sw.result.ResultTest
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 sec
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 sec
 
-Testcase: testCompareTo took 0.001 sec
+Testcase: testCompareTo took 0.002 sec
 Testcase: testGetters took 0 sec
 Testcase: testSetters took 0 sec

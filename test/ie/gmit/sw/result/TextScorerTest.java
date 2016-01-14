@@ -15,7 +15,7 @@ public class TextScorerTest {
 	
 	@Before
 	public void before() {
-		FileIO.parseQuadGramFile("./4grams.txt");
+		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
 	}
 
 	@Test

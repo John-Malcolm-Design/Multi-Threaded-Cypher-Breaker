@@ -8,13 +8,13 @@ import java.util.HashMap;
 import org.junit.Before;
 import org.junit.Test;
 
-import ie.gmit.sw.io.FileIO;
+import ie.gmit.sw.io.FileIO;;
 
 public class QuadGramMapTest {
 	
 	@Before
 	public void before(){
-		FileIO.parseQuadGramFile("./4grams.txt");
+		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
 	}
 
 	@Test

@@ -15,17 +15,17 @@ public class FileIOTest {
 	@Test
 	public void testCheckFileExists() {
 		assertFalse(FileIO.checkFileExists("fake/file/URI.txt"));
-		assertTrue(FileIO.checkFileExists("./wp-intro.txt"));
+		assertTrue(FileIO.checkFileExists("./textfiles/wp-intro.txt"));
 	}
 	
 	@Test
 	public void testParseTextFile(){
-		assertTrue(FileIO.parseTextFile("./wp-intro-small.txt").equals(wpIntro.replaceAll("[^a-zA-Z]+", "").toUpperCase()));
+		assertTrue(FileIO.parseTextFile("./textfiles/wp-intro-small.txt").equals(wpIntro.replaceAll("[^a-zA-Z]+", "").toUpperCase()));
 	}
 	
 	@Test
 	public void testParseQuadGramFile(){
-		FileIO.parseQuadGramFile("./4grams.txt");
+		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
 		assertTrue(QuadGramMap.getMap() != null);
 	}
 }

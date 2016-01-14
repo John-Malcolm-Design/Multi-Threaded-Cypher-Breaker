@@ -1,5 +1,5 @@
 Testsuite: ie.gmit.sw.result.QuadGramMapTest
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.806 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.63 sec
 
-Testcase: testGetters took 0.564 sec
+Testcase: testGetters took 0.386 sec
 Testcase: testSetMap took 0.226 sec
