@@ -1,8 +1,6 @@
 package ie.gmit.sw;
 
-import ie.gmit.sw.cryptography.CypherBreaker;
-import ie.gmit.sw.cryptography.Encryptor;
-import ie.gmit.sw.io.FileIO;
+import ie.gmit.sw.io.CommandLineIO;
 
 /**
  * <h1>Runner</h1>
@@ -29,16 +27,6 @@ public class Runner {
 	 * @throws Exception - Default Exception.
 	 */
 	public static void main(String[] args) throws Exception{
-		// Parses the introduction to "War & Peace" plain text and passes text to String called plainText.
-		String plainText = FileIO.parseTextFile("./wp-intro.txt");
-				
-		// Encrypts using plainText string and specified key lenght as six. 
-		String cypherText = Encryptor.encrypt(plainText, 6);
-		
-		// Creates new CypherBreaker object.
-		CypherBreaker cb = new CypherBreaker();
-		
-		// Decyphers cypherText
-		cb.decypher(cypherText);
+		CommandLineIO.startCLI();
 	}	
 }

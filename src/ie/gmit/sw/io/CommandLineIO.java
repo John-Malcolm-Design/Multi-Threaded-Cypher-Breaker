@@ -7,11 +7,11 @@ import ie.gmit.sw.cryptography.CypherBreaker;
 import ie.gmit.sw.cryptography.Decryptor;
 import ie.gmit.sw.cryptography.Encryptor;
 
-public class CommandLineInput {
+public class CommandLineIO {
 	private static Scanner console = new Scanner(System.in);
 	private static String cypherText;
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void startCLI() throws IOException, InterruptedException {
 		System.out.printf("%s","\n   *** Welcome to the RailFence cypher ***\n\n");
 		String userChoice = null;
 		do {
@@ -62,7 +62,7 @@ public class CommandLineInput {
 						switch (lastEncryptChoice) {
 						case "yes":
 							if (cypherText == null) {
-								System.out.println("Sorry there is no cypher text from last encryption.");
+								System.out.println("Sorry you have not run the encryption since starting the app.\n");
 								break;
 							}
 							System.out.println("Please enter the key");
@@ -100,6 +100,10 @@ public class CommandLineInput {
 					lastChoice = console.nextLine();
 					switch (lastChoice) {
 					case "yes":
+						if (cypherText == null) {
+							System.out.println("Sorry you have not run the encryption since starting the app.\n");
+							break;
+						}
 						// Creates new CypherBreaker object.
 						CypherBreaker cb = new CypherBreaker();
 						

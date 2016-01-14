@@ -3,6 +3,7 @@ package ie.gmit.sw.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -56,17 +57,36 @@ public class FileIO {
 	 * @throws IOException Regular IOException.
 	 * @see ie.gmit.sw.result.QuadGramMap
 	 */
-	public static void parseQuadGramFile(String file) throws IOException {
-		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+	public static void parseQuadGramFile(String file) {
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		String next= null;
 
 		// While the BufferedReader is not null split on spaces and add to Map.
-		while ((next = br.readLine()) != null) {
-			String [] stuff = next.split(" ");
-			QuadGramMap.getMap().put(stuff[0], Double.parseDouble(stuff[1]));
+		try {
+			while ((next = br.readLine()) != null) {
+				String [] stuff = next.split(" ");
+				QuadGramMap.getMap().put(stuff[0], Double.parseDouble(stuff[1]));
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		br.close();
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public static String checkFileExists(){

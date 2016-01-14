@@ -1,6 +1,5 @@
 package ie.gmit.sw.cryptography;
 
-import java.io.IOException;
 import java.util.concurrent.*;
 
 import ie.gmit.sw.io.FileIO;
@@ -41,18 +40,13 @@ public class CypherBreaker {
 	public BlockingQueue<Resultable> getQueue() {
 		return queue;
 	}
-	
+
 	/**
 	 * Initializes the Quad Gram Map (4 char long english n-gram ) which can be used for scoring decrypted text.
 	 * @see ie.gmit.sw.io.FileIO#parseTextFile(String)
 	 */
 	public void init() {
-		try {
-			// Init map with 4grams text file.
-			FileIO.parseQuadGramFile("./4grams.txt");
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+		FileIO.parseQuadGramFile("./4grams.txt");
 	}
 
 	/**
@@ -64,7 +58,7 @@ public class CypherBreaker {
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)">ExecutorService.submit(Runnable)</a>
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#shutdown()">ExecutorService.shutdown()</a>
 	 */
-	public void decypher(String cypherTxt) throws InterruptedException{
+	public void decypher(String cypherTxt){
 		// Init queue and cypher text string.
 		queue = new PriorityBlockingQueue<Resultable>(MAX_QUEUE_SIZE); 
 		this.cypherText = cypherTxt;
@@ -88,7 +82,7 @@ public class CypherBreaker {
 		} catch (InterruptedException e) {
 			// TODO: handle exception
 		}
-	}	
+	}
 }
 
 
