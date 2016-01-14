@@ -28,7 +28,23 @@ public class CommandLineIO {
 				String textOrFileChoice = console.nextLine();
 				switch (textOrFileChoice) {
 				case "1":
-					String fileURI = FileIO.checkFileExists();
+					boolean validFile;
+					String fileURI;
+
+					do {
+						// Resets flag
+						validFile = true;
+
+						// Promps for file url
+						System.out.println("Please enter the file URI.");
+						fileURI = console.nextLine();
+						validFile = FileIO.checkFileExists(fileURI);
+						// Tells user that the file url provided is invalid
+						if (validFile == false) {
+							System.out.println("Invalid file url. Try again.");
+						}
+						// Keeps looping until user enters a valid file url
+					} while (validFile == false);
 
 					// Parses the users file plain text and passes text to String called plainText.
 					String plainText1 = FileIO.parseTextFile(fileURI);
@@ -55,43 +71,42 @@ public class CommandLineIO {
 				}
 				break;
 			case "2":
-					System.out.println("Would you like to decrypt the cypher text from last encryption? (yes/no)");
-					String lastEncryptChoice = null;
-					do {
-						lastEncryptChoice = console.nextLine();
-						switch (lastEncryptChoice) {
-						case "yes":
-							if (cypherText == null) {
-								System.out.println("Sorry you have not run the encryption since starting the app.\n");
-								break;
-							}
-							System.out.println("Please enter the key");
-							int keyLastEncrypt = console.nextInt();
-							console.nextLine();
-							String plainText = Decryptor.decrypt(cypherText, keyLastEncrypt);
-							System.out.println("Decrypted text = " + plainText + "\n");
-							break;
-
-						case "no":
-							String fileURI = FileIO.checkFileExists();
-
-							// Parses the users file plain text and passes text to String called plainText.
-							String cypherText2 = FileIO.parseTextFile(fileURI);
-							
-							System.out.println("Please enter the key");
-							int keyLastEncrypt2 = console.nextInt();
-							console.nextLine();							
-							String plainText2 = Decryptor.decrypt(cypherText2, keyLastEncrypt2);
-							System.out.println("Decrypted text = " + plainText2 + "\n");
-							
-							break;
-
-						default:
-							System.out.println("That is not a valid option. Please choose either \"yes\" or \"no\"");
-							lastEncryptChoice = null;
+				System.out.println("Would you like to decrypt the cypher text from last encryption? (yes/no)");
+				String lastEncryptChoice = null;
+				do {
+					lastEncryptChoice = console.nextLine();
+					switch (lastEncryptChoice) {
+					case "yes":
+						if (cypherText == null) {
+							System.out.println("Sorry you have not run the encryption since starting the app.\n");
 							break;
 						}
-					} while (lastEncryptChoice == null);
+						System.out.println("Please enter the key");
+						int keyLastEncrypt = console.nextInt();
+						console.nextLine();
+						String plainText = Decryptor.decrypt(cypherText, keyLastEncrypt);
+						System.out.println("Decrypted text = " + plainText + "\n");
+						break;
+
+					case "no":
+						
+						// Parses the users file plain text and passes text to String called plainText.
+						String cypherText2 = FileIO.parseTextFile(getAndCheckFile());
+
+						System.out.println("Please enter the key");
+						int keyLastEncrypt2 = console.nextInt();
+						console.nextLine();							
+						String plainText2 = Decryptor.decrypt(cypherText2, keyLastEncrypt2);
+						System.out.println("Decrypted text = " + plainText2 + "\n");
+
+						break;
+
+					default:
+						System.out.println("That is not a valid option. Please choose either \"yes\" or \"no\"");
+						lastEncryptChoice = null;
+						break;
+					}
+				} while (lastEncryptChoice == null);
 				break;
 			case "3":
 				System.out.println("Would you like to decrypt the cypher text from last encryption? (yes/no)");
@@ -106,7 +121,7 @@ public class CommandLineIO {
 						}
 						// Creates new CypherBreaker object.
 						CypherBreaker cb = new CypherBreaker();
-						
+
 						// Decyphers cypherText
 						cb.decypher(cypherText);
 						System.out.println("Decyphered text = " + cb.getQueue().peek().getPlainText());
@@ -118,14 +133,13 @@ public class CommandLineIO {
 						String textOrFileChoice2 = console.nextLine();
 						switch (textOrFileChoice2) {
 						case "1":
-							String fileURI = FileIO.checkFileExists();
-							
+
 							// Parses the users file plain text and passes text to String called plainText.
-							String cypherTextBreaker = FileIO.parseTextFile(fileURI);
+							String cypherTextBreaker = FileIO.parseTextFile(getAndCheckFile());
 
 							// Creates new CypherBreaker object.
 							CypherBreaker cb2 = new CypherBreaker();
-							
+
 							// Decyphers cypherText
 							cb2.decypher(cypherTextBreaker);
 							System.out.println("Decyphered text = " + cb2.getQueue().peek().getPlainText());
@@ -138,7 +152,7 @@ public class CommandLineIO {
 
 							// Creates new CypherBreaker object.
 							CypherBreaker cb3 = new CypherBreaker();
-							
+
 							// Decyphers cypherText
 							cb3.decypher(plainText2);
 							System.out.println("Decyphered text = " + cb3.getQueue().peek().getPlainText());
@@ -157,7 +171,7 @@ public class CommandLineIO {
 						break;
 					}
 				} while (lastChoice == null);
-			
+
 				break;
 			case "4":
 				userChoice = null;
@@ -169,13 +183,33 @@ public class CommandLineIO {
 				break;
 			}
 		}while (!(userChoice == null));
-		
+
 		System.out.println("Bye. CSSBUNMTPRRORCINAOPTAAOYUTOEEWTAMEIEOEUMEHSNIOECSGDSPTECMRTORTTOSBLSESIKUNOCSRAEDJ");
 		console.close();
 	} 
+	
+	private static String getAndCheckFile(){
+		boolean validFile;
+		String fileURI;
 
+		do {
+			// Resets flag
+			validFile = true;
 
-	public static int keyInput(int plainTextLenght){
+			// Promps for file url
+			System.out.println("Please enter the file URI.");
+			fileURI = console.nextLine();
+			validFile = FileIO.checkFileExists(fileURI);
+		// Tells user that the file url provided is invalid
+		if (validFile == false) {
+			System.out.println("Invalid file url. Try again.");
+		}
+		// Keeps looping until user enters a valid file url
+	} while (validFile == false);
+		return fileURI;
+	}
+	
+	private static int keyInput(int plainTextLenght){
 		int key = 0;
 		do {
 			System.out.println("Please enter a key for encryption.");

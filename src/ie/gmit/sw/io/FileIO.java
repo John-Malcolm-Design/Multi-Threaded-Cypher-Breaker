@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
 
 import ie.gmit.sw.result.QuadGramMap;
 
@@ -32,20 +31,36 @@ public class FileIO {
 	 * 
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#replaceAll(java.lang.String,%20java.lang.String)">String.replaceAll()</a>
 	 */
-	public static String parseTextFile(String file) throws IOException{
+	public static String parseTextFile(String file){
 		// Initialize and instantiate files.
 		StringBuffer sb = new StringBuffer();
-		BufferedReader br= new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		BufferedReader br = null;
+		try {
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		String line = null;
 
 		// While the Buffered Reader is not null read and append to StringBuffer.
-		while ((line = br.readLine()) != null) {
-			/* Regex is used via the String class for data sanitizing. All characters that are 
-			 * outside of the range a-z are removed. All characters are also converted to uppercase for consistency. */
-			sb.append(line.replaceAll("[^a-zA-Z]+", "").toUpperCase());
+		try {
+			while ((line = br.readLine()) != null) {
+				/* Regex is used via the String class for data sanitizing. All characters that are 
+				 * outside of the range a-z are removed. All characters are also converted to uppercase for consistency. */
+				sb.append(line.replaceAll("[^a-zA-Z]+", "").toUpperCase());
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		br.close();
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return sb.toString();
 	}
@@ -89,37 +104,17 @@ public class FileIO {
 		}
 	}
 
-	public static String checkFileExists(){
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		boolean validFile;
-		File f = null;
-		String fileURL;
+	public static boolean checkFileExists(String fileURI){
 
-		do {
-			// Resets flag
-			validFile = true;
+		File f = new File(fileURI);
 
-			// Promps for file url
-			System.out.println("Please enter the file URI.");
-			fileURL = scanner.nextLine();
-
-			f = new File(fileURL);
-
-			// Checks too see if file url provided can be used in as a file input stream
-			try {
-				@SuppressWarnings({ "unused", "resource" })
-				BufferedReader testBr = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-			} catch (Exception e) {
-				validFile = false;
-			}
-
-			// Tells user that the file url provided is invalid
-			if (validFile == false) {
-				System.out.println("Invalid file url. Try again.");
-			}
-			// Keeps looping until user enters a valid file url
-		} while (validFile == false);
-		return fileURL;
+		// Checks too see if file url provided can be used in as a file input stream
+		try {
+			@SuppressWarnings({ "unused", "resource" })
+			BufferedReader testBr = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 }
