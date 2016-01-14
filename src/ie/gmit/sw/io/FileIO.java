@@ -27,7 +27,6 @@ public class FileIO {
 	 * 
 	 * @param file The URI of the file for parsing.
 	 * @return String containing text the from the text file.
-	 * @throws IOException Regular IOException.
 	 * 
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#replaceAll(java.lang.String,%20java.lang.String)">String.replaceAll()</a>
 	 */
@@ -69,7 +68,6 @@ public class FileIO {
 	 * Parses quad gram file from into Map.
 	 * 
 	 * @param file  containing URI for n-gram file.
-	 * @throws IOException Regular IOException.
 	 * @see ie.gmit.sw.result.QuadGramMap
 	 */
 	public static void parseQuadGramFile(String file) {

@@ -9,12 +9,11 @@
      						A Multi-threaded Cypher Breaker
 	 
      =================================================================================== -->
-<project name="aoodpp" default="deploy">
+	<project name="app.name" default="deploy">
     <description>
 		B.Sc. Software Development
         2015 Assignment - A Multi-threaded Cypher Breaker
     </description>
-	
 	 <tstamp>
 	    <format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
 	 </tstamp>
@@ -25,20 +24,26 @@
 	<property name="app.name" value="A Multi-threaded Cypher Breaker"/>
 	<property name="app.version" value="1.0"/>
 	<property name="app.version.name" value="Scarab"/>
-	<property name="jre.target" value="1.6"/>
-	<property name="srcDir" value="./src/"/>
-	<property name="distDir" value="./dist"/>
-	<property name="docDir" value="${distDir}/docs"/>
+	<property name="jre.target" value="1.7"/>
+	<property name="src.dir" value="./src/"/>
+	<property name="test.dir" value="./test/"/>
+	<property name="dist.dir" value="./dist"/>
+	<property name="doc.dir" value="${dist.dir}/docs"/>
 	<property name="build.time" value="${TODAY}"/>
-
+	
 	<path id="classpath">
     	<pathelement location="." />
+		<pathelement location="${build.tests}"/>
+		<pathelement location="${test.dir}lib/junit-4.12.jar"/>
+		<pathelement location="${test.dir}lib/hamcrest-core-1.3.jar"/>
   	</path>
+		
+	
   	
 	<echo>
 	----------------------------------------------------------------------------
 	Application: ${app.name} ${app.version}
-	Build File : ${ant.file} 
+	Build File : ${ant.file}
 	Run Date   : ${build.time}
 	Run by     : ${user.name}
 	Base Dir   : ${basedir}
@@ -46,31 +51,31 @@
 	----------------------------------------------------------------------------</echo>
 	<!-- Delete any previously created directories and files -->
     <target name="clean">
-    	<delete dir="${docDir}"/>
+    	<delete dir="${doc.dir}"/>
     	<delete> 
-    	    <fileset dir="${distDir}" includes="**/*"/> 
+    	    <fileset dir="${dist.dir}" includes="**/*"/> 
     	</delete> 
     </target>
 	
 	<!-- Initialisation task -->
     <target name="init" depends="clean">
 		<tstamp/>
-    	<mkdir dir="${distDir}"/>
+    	<mkdir dir="${dist.dir}"/>
 
 	</target>	
 
 	<!-- Compile source code -->
 	<target name="compile" depends="init">
-		<javac target="${jre.target}" source="${jre.target}" srcdir="${srcDir}" destdir="${distDir}">
+		<javac target="${jre.target}" source="${jre.target}" srcdir="${src.dir}" destdir="${dist.dir}">
 		    <classpath refid="classpath" />
 		</javac>
 	</target>
 
 	<!-- Create Java application archive (Jar) -->
 	<target name="archive" depends="compile">
-        <jar destfile="${distDir}/railfence.jar" basedir="${distDir}" excludes="**/*Test.class, **/Compact*.class">         
+        <jar destfile="${dist.dir}/railfence.jar" basedir="${dist.dir}" excludes="**/*Test.class, **/Compact*.class">         
         	 <manifest>
-        	 	<attribute name="Main-Class" value="ie.gmit.sw.RailFence"/>
+        	 	<attribute name="Main-Class" value="ie.gmit.sw.Runner"/>
 				<attribute name="Built-By" value="${user.name}"/>
 				<attribute name="Implementation-Vendor" value="${org.name}"/>
 				<attribute name="Implementation-Title" value="${app.name}"/>
@@ -81,7 +86,7 @@
 	
 	<!-- Generate JavaDocs -->
     <target name="docs" depends="archive">
-        <javadoc sourcepath="${srcDir}" destdir="${docDir}" author="true" version="true" use="true" windowtitle="A Multi-threaded Cypher Breaker" >
+        <javadoc sourcepath="${src.dir}" destdir="${doc.dir}" author="true" version="true" use="true" windowtitle="A Multi-threaded Cypher Breaker" >
             <doctitle><![CDATA[<h1>A Multi-threaded Cypher Breaker</h1>]]></doctitle>
             <bottom><![CDATA[<i>Copyright &#169; 2015</i>]]></bottom>
         </javadoc>
@@ -89,7 +94,30 @@
 
 	<!-- Compress classes and documentation into Zip and compressed tarball -->
 	<target name="deploy" depends="docs">
-		<tar destfile="${distDir}/${user.name}.tar.gz" basedir="${distDir}" includes="*" compression="gzip"/> 
-		<zip destfile="${distDir}/${user.name}.zip" basedir="${distDir}"/>
+		<tar destfile="${dist.dir}/${user.name}.tar.gz" basedir="${dist.dir}" includes="*" compression="gzip"/> 
+		<zip destfile="${dist.dir}/${user.name}.zip" basedir="${dist.dir}"/>
     </target>
+		
+    <target name="junit" depends="compile">
+    	<mkdir dir="${test.dir}reports"/>
+    	<mkdir dir="${test.dir}bin"/>
+    	
+		<javac target="${jre.target}" source="${jre.target}" srcdir="${test.dir}" destdir="${dist.dir}">
+		    <classpath refid="classpath" />
+		</javac>
+    	
+        <junit printsummary="yes" haltonfailure="yes">
+            <classpath>
+                <path refid="classpath"/>
+            	<pathelement location="${dist.dir}"/>
+            </classpath>
+        	
+            <formatter type="plain"/>
+        	
+            <batchtest fork="yes" todir="${test.dir}reports">
+                <fileset dir="${test.dir}" includes="**/*Test*.java"/>
+            </batchtest>
+        </junit>
+    </target>
+	
 </project>

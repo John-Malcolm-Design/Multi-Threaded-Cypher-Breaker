@@ -54,7 +54,6 @@ public class CypherBreaker {
 	 * Creates ExecutorService that handles thread management. ExecutorService also handlels shutting down threads.
 	 * 
 	 * @param cypherTxt String containing the cypher text.
-	 * @throws InterruptedException Thread error.
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#submit(java.lang.Runnable)">ExecutorService.submit(Runnable)</a>
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html#shutdown()">ExecutorService.shutdown()</a>
 	 */

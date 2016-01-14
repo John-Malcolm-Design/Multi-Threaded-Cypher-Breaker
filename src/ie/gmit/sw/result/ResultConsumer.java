@@ -37,9 +37,6 @@ public class ResultConsumer implements Runnable {
 		this.topResult = topResult;
 	}
 	
-
-
-
 	/**
 	 * While the queue is not empty it will take a result object with a score greater than -2000 
 	 * and print it to the screen.

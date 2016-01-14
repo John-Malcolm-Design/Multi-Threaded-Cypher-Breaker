@@ -18,6 +18,7 @@ public class ResultConsumerTest {
 	private String cypherText = "TTFOHATGRNREEANOETYRCIMHHAKT";
 	private String plainText = "THEYAREATTACKINGFROMTHENORTH";
 	
+	@SuppressWarnings("deprecation")
 	@Before
 	public void before(){
 		queue = new ArrayBlockingQueue<Resultable>(7);
@@ -41,8 +42,8 @@ public class ResultConsumerTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		@SuppressWarnings("deprecation")
 		Resultable result = rc.getTopResult();
 		assertTrue(result.getPlainText().equals(plainText));
 	}
-
 }
