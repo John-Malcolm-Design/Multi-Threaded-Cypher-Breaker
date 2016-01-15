@@ -1,8 +1,7 @@
 package ie.gmit.sw.cryptography;
 
 /**
- * <h1>Encryptor</h1>
- * Rail fence encryption algorithm and print matrix function used for debugging.
+ * Rail fence encryption and cypher representation printing used for debugging.
  * 
  * @author John Malcolm Anderson
  * @version 1.0
@@ -57,8 +56,7 @@ public class Encryptor {
 
 	/**
 	 * Output the 2D array in CSV format
-	 * 
-	 * @param matrix takes 2D matrix representing the Rail Fence. See skytale for example.
+	 * @param Matrix takes 2D matrix representing the Rail Fence. See skytale for example.
 	 */
 	@SuppressWarnings("unused")
 	private static void printMatrix(char[][] matrix){

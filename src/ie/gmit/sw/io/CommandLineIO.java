@@ -1,6 +1,5 @@
 package ie.gmit.sw.io;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import ie.gmit.sw.cryptography.CypherBreaker;
@@ -11,7 +10,7 @@ public class CommandLineIO {
 	private static Scanner console = new Scanner(System.in);
 	private static String cypherText;
 
-	public static void startCLI() throws IOException, InterruptedException {
+	public static void startCLI() {
 		System.out.printf("%s","\n   *** Welcome to the RailFence cypher ***\n\n");
 		String userChoice = null;
 		do {

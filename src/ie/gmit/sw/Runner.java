@@ -3,29 +3,24 @@ package ie.gmit.sw;
 import ie.gmit.sw.io.CommandLineIO;
 
 /**
- * <h1>Runner</h1>
- * Main entry point for application.
- * Takes plain text and delegates to other classes to complete full,
- * parsing, encrypting, decrypting, scoring, decyphering and other functionality.
+ * Entry point for the application.
+ * <p>
+ * This class should always be the entry point to the application.
+ * Delegates to either CLI, GUI, network or other I/O.
  * 
  * @author John Malcolm Anderson
  * @version 1.0
  * @since 30/12/2015
- * 
- * @see ie.gmit.sw.cryptography
- * @see ie.gmit.sw.result
- * @see ie.gmit.sw.io
- *
+ * @see ie.gmit.sw.io.CommandLineIO
  */
 public class Runner {
 	/**
-	 * Entry point of application, deals with creating and initializing objects
-	 * to handle user input, encryption, decryption and decyphering.
+	 * Delegates to CommandLineIO.startCLI() to handle User input via the command line.
 	 * 
-	 * @param args - Default string argument
-	 * @throws Exception - Default Exception.
+	 * @param args Default main() function string argument
+	 * @see ie.gmit.sw.io.CommandLineIO#startCLI()
 	 */
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args){
 		CommandLineIO.startCLI();
 	}	
 }

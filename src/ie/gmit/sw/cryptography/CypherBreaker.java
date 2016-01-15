@@ -6,12 +6,14 @@ import ie.gmit.sw.io.FileIO;
 import ie.gmit.sw.result.Resultable;
 
 /**
- * <h1>CypherBreaker</h1>
- * Responsible for creating the results queue and for 
- * spawning off threads that handle decrypting, 
- * the method that deals with that is called decrypt. 
+ * Brute force decyphering based on fingerprint analysis using quad grams.
  * <p>
- * The init method is used to inititialize the Quad Gram Map in memory. 
+ * This class works by spawning off Decryptor threads that handle decrypting, 
+ * the method that deals with that is decrypt in the Decryptor class. 
+ * The CypherBreaker uses an ExecutorService, Executors and a PriorityBlockingQueue to
+ * circumvent previous producer/ consumer decypher style (see ResultConsumer class and ResultConsumerTest for more info).
+ * The new implementation saves memory as I use a smaller queue and also makes the code more readable. Upon completion 
+ * getQueue() method is used to access the top result based on the TextScorer clases.
  * 
  * @author John Malcolm Anderson
  * @version 1.0
@@ -37,6 +39,10 @@ public class CypherBreaker {
 		init();
 	}
 
+	/**
+	 * Get method that exposes the queue for access to the top 5 results.
+	 * @return
+	 */
 	public BlockingQueue<Resultable> getQueue() {
 		return queue;
 	}

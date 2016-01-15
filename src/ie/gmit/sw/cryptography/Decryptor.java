@@ -7,11 +7,10 @@ import ie.gmit.sw.result.Resultable;
 import ie.gmit.sw.result.TextScorer;
 
 /**
- * <h1>Decryptor</h1>
- * Decryptor objects are used in brute force decyphering. 
+ * Decryptor implements Runnable for brute force decyphering across multiple threads.  
+ * <p>
  * This works by spawning off several( n/2 ) threads each one with its own unique 
  * key to use but each with the same cypher text, quadgram map and blocking queue for handling the results.
- * <p>
  * 
  * @author John Malcolm Anderson
  * @version 1.0
@@ -28,7 +27,7 @@ public class Decryptor implements Runnable {
 	private int key;
 
 	/**
-	 * Default constructor. 
+	 * Constructor with params. 
 	 * 
 	 * @param queue Concurrent queue is accessed by multiple threads to store results.
 	 * @param cypherText String to store cypher text. 
