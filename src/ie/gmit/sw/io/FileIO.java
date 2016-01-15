@@ -27,7 +27,6 @@ public class FileIO {
 	 * 
 	 * @param file The URI of the file for parsing.
 	 * @return String containing text the from the text file.
-	 * 
 	 * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#replaceAll(java.lang.String,%20java.lang.String)">String.replaceAll()</a>
 	 */
 	public static String parseTextFile(String file){
@@ -67,17 +66,11 @@ public class FileIO {
 	/**
 	 * Parses quad gram file from into Map.
 	 * 
-	 * @param file  containing URI for n-gram file.
 	 * @see ie.gmit.sw.result.QuadGramMap
 	 */
-	public static void parseQuadGramFile(String file) {
+	public static void parseQuadGramFile() {
 		BufferedReader br = null;
-		try {
-			br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		br = new BufferedReader(new InputStreamReader(FileIO.class.getClassLoader().getResourceAsStream("4grams.txt")));
 
 		String next= null;
 

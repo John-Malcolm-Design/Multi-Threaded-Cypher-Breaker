@@ -30,21 +30,10 @@ public class CommandLineIO {
 				case "1":
 					boolean validFile;
 					String fileURI;
-
-					do {
-						// Resets flag
-						validFile = true;
-
-						// Promps for file url
-						System.out.println("Please enter the file URI.");
-						fileURI = console.nextLine();
-						validFile = FileIO.checkFileExists(fileURI);
-						// Tells user that the file url provided is invalid
-						if (validFile == false) {
-							System.out.println("Invalid file url. Try again.");
-						}
-						// Keeps looping until user enters a valid file url
-					} while (validFile == false);
+					
+					if ((fileURI = getAndCheckUserFile()).equals("menu")) {
+						break;
+					}
 
 					// Parses the users file plain text and passes text to String called plainText.
 					String plainText1 = FileIO.parseTextFile(fileURI);
@@ -56,8 +45,13 @@ public class CommandLineIO {
 					break;
 
 				case "2":
-					System.out.println("Please enter the message you would like to encrypt. (Should be english and spelled correctly)");
+					System.out.println("Please enter the message you would like to encrypt. (Minimum 15 chars.)");
 					String plainText2 = console.nextLine();
+					
+					if (plainText2.length() < 15) {
+						System.out.println("Message too small: Minimum 15 chars.");
+						continue;
+					}
 
 					// Encrypts using plainText string and specified key lenght as six. 
 					cypherText = Encryptor.encrypt(plainText2.replaceAll("[^a-zA-Z]+", "").toUpperCase(), keyInput(plainText2.length()));
@@ -91,7 +85,14 @@ public class CommandLineIO {
 					case "no":
 						
 						// Parses the users file plain text and passes text to String called plainText.
-						String cypherText2 = FileIO.parseTextFile(getAndCheckUserFile());
+						
+						String fileURI;
+						
+						if ((fileURI = getAndCheckUserFile()).equals("menu")) {
+							break;
+						}
+						
+						String cypherText2 = FileIO.parseTextFile(fileURI);
 
 						System.out.println("Please enter the key");
 						int keyLastEncrypt2 = console.nextInt();
@@ -133,9 +134,14 @@ public class CommandLineIO {
 						String textOrFileChoice2 = console.nextLine();
 						switch (textOrFileChoice2) {
 						case "1":
-
+							String fileURI;
+							
+							if ((fileURI = getAndCheckUserFile()).equals("menu")) {
+								break;
+							}
+							
 							// Parses the users file plain text and passes text to String called plainText.
-							String cypherTextBreaker = FileIO.parseTextFile(getAndCheckUserFile());
+							String cypherTextBreaker = FileIO.parseTextFile(fileURI);
 
 							// Creates new CypherBreaker object.
 							CypherBreaker cb2 = new CypherBreaker();
@@ -149,6 +155,11 @@ public class CommandLineIO {
 						case "2":
 							System.out.println("Please enter the message you would like to decrypt.");
 							String plainText2 = console.nextLine();
+							
+							if (plainText2.length() < 15) {
+								System.out.println("Message too small: Minimum 15 chars.");
+								continue;
+							}
 
 							// Creates new CypherBreaker object.
 							CypherBreaker cb3 = new CypherBreaker();
@@ -191,6 +202,7 @@ public class CommandLineIO {
 	private static String getAndCheckUserFile(){
 		boolean validFile;
 		String fileURI;
+		String exit;
 
 		do {
 			// Resets flag
@@ -200,9 +212,12 @@ public class CommandLineIO {
 			System.out.println("Please enter the file URI.");
 			fileURI = console.nextLine();
 			validFile = FileIO.checkFileExists(fileURI);
+			if (fileURI.equals("menu")) {
+				break;
+			}
 		// Tells user that the file url provided is invalid
 		if (validFile == false) {
-			System.out.println("Invalid file url. Try again.");
+			System.out.println("Invalid file url. Try again. Or type \"menu\" to return to the main menu.");
 		}
 		// Keeps looping until user enters a valid file url
 	} while (validFile == false);

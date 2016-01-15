@@ -16,6 +16,7 @@ public class CypherBreakerTest {
 	@Test
 	public void testInit(){
 		assertTrue(QuadGramMap.getMap() != null);
+		assertTrue(QuadGramMap.getMap().get("TION") == 13168375);
 	}
 	
 	@Test

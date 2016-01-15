@@ -25,7 +25,7 @@ public class FileIOTest {
 	
 	@Test
 	public void testParseQuadGramFile(){
-		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
+		FileIO.parseQuadGramFile();
 		assertTrue(QuadGramMap.getMap() != null);
 	}
 }

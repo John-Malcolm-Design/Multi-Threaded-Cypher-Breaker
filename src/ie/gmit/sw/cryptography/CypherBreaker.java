@@ -46,7 +46,7 @@ public class CypherBreaker {
 	 * @see ie.gmit.sw.io.FileIO#parseTextFile(String)
 	 */
 	public void init() {
-		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
+		FileIO.parseQuadGramFile();
 	}
 
 	/**

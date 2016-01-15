@@ -14,7 +14,7 @@ public class QuadGramMapTest {
 	
 	@Before
 	public void before(){
-		FileIO.parseQuadGramFile("./textfiles/4grams.txt");
+		FileIO.parseQuadGramFile();
 	}
 
 	@Test
