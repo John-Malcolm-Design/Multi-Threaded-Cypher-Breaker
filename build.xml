@@ -101,7 +101,6 @@
     </target>
 		
     <target name="junit" depends="compile">
-    	<mkdir dir="${test.dir}reports"/>
 		<javac target="${jre.target}" source="${jre.target}" srcdir="${test.dir}" destdir="${dist.dir}" includeantruntime="false">
 		    <classpath refid="classpath" />
 			<compilerarg value="-Xlint:-options"/>
