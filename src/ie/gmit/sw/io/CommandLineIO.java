@@ -28,7 +28,6 @@ public class CommandLineIO {
 				String textOrFileChoice = console.nextLine();
 				switch (textOrFileChoice) {
 				case "1":
-					boolean validFile;
 					String fileURI;
 					
 					if ((fileURI = getAndCheckUserFile()).equals("menu")) {
@@ -202,7 +201,6 @@ public class CommandLineIO {
 	private static String getAndCheckUserFile(){
 		boolean validFile;
 		String fileURI;
-		String exit;
 
 		do {
 			// Resets flag

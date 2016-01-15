@@ -1,4 +1,0 @@
-Testsuite: ie.gmit.sw.cryptography.EncryptorTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 sec
-
-Testcase: testEncrypt took 0.008 sec
