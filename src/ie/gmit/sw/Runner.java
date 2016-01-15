@@ -1,7 +1,5 @@
 package ie.gmit.sw;
 
-import org.apache.log4j.Logger;
-
 import ie.gmit.sw.io.CommandLineIO;
 
 /**
@@ -20,8 +18,6 @@ import ie.gmit.sw.io.CommandLineIO;
  *
  */
 public class Runner {
-	public static final Logger log = Logger.getLogger(Runner.class);
-
 	/**
 	 * Entry point of application, deals with creating and initializing objects
 	 * to handle user input, encryption, decryption and decyphering.

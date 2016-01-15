@@ -79,7 +79,6 @@ public class CypherBreaker {
 		try {
 			executor.awaitTermination(1, TimeUnit.DAYS);
 		} catch (InterruptedException e) {
-			// TODO: handle exception
 		}
 	}
 }
