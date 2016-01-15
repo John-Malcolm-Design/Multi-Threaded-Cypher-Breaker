@@ -1,9 +1,7 @@
 package ie.gmit.sw.result;
 
 /**
- * <h1>Result</h1>
- * Result object stores the decyphered text, the key used
- * for decryption and the score given by the TextScorer.
+ * Encapsulates decyphered text, key used for decryption and the score given by the TextScorer.
  * <p>
  * Implements Comparable to allow objects to be sorted.
  * 

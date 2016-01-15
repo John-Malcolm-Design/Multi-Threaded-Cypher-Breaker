@@ -41,7 +41,7 @@ public class CypherBreaker {
 
 	/**
 	 * Get method that exposes the queue for access to the top 5 results.
-	 * @return
+	 * @return PriorityArrayBlockingQueue with the top 5 results.
 	 */
 	public BlockingQueue<Resultable> getQueue() {
 		return queue;

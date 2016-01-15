@@ -1,8 +1,7 @@
 package ie.gmit.sw.result;
 
 /**
- * <h1>TextScorer</h1>
- * Calculate and retrieve the score of texts.
+ * Calculate and retrieve the score of texts based on n gram scoring.
  * 
  * @author John Malcolm Anderson
  * @version 1.0

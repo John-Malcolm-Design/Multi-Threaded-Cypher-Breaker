@@ -10,15 +10,13 @@ import java.io.InputStreamReader;
 import ie.gmit.sw.result.QuadGramMap;
 
 /**
- * <h1>FileParser</h1>
- * Contains methods for reading in files and parsing to strings.
+ * File IO methods.
  * 
  * @author John Malcolm Anderson
  * @version 1.0
  * @since 01/01/2016
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/StringBuffer.html">StringBuffer</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a>
- *
  */
 public class FileIO { 
 

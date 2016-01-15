@@ -1,9 +1,9 @@
 package ie.gmit.sw.result;
 
 /**
- * <h1>Resultable</h1>
- * Interface specifies methods common to all Result type objects
- * that inherit from this class. These are getters/ setters for key, score and plain text.
+ * Interface specifies methods common to all Result type objects.
+ * Getters/ setters for key, score and plain text.
+ * Allows abstraction to different types of results.
  * 
  * @author John Malcolm Anderson
  * @since 01/01/2016

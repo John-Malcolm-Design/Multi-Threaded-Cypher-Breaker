@@ -3,7 +3,6 @@ package ie.gmit.sw.result;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * <h1>ResultConsumer</h1>
  * Consumer in producer/ consumer model used to handle decrypting cypher text on multiple threads concurrently.
  * <p>
  * <b>This class has been deprecated.</b> Producer/consumer model was slower,
@@ -13,13 +12,13 @@ import java.util.concurrent.BlockingQueue;
  * @author John Malcolm Anderson
  * @version 1.0
  * @since 01/01/2016
- * @deprecated The producer/ consumer model replaced with a PriorityArrayBlockingQueue and ExecutorService system.
+ * @deprecated The producer/ consumer model has been replaced with a PriorityArrayBlockingQueue and ExecutorService system.
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/PriorityBlockingQueue.html">PriorityBlockingQueue</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html">Executors</a>
  * @see <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">ExecutorService</a>
  */
 public class ResultConsumer implements Runnable {
-	
+	// Class variables
 	private BlockingQueue<Resultable> queue;
 	private double topScore= -99999999.999;
 	private Resultable topResult = null;
@@ -29,10 +28,15 @@ public class ResultConsumer implements Runnable {
 		this.queue = q;
 	}
 
+	/**
+	 * Get the top result
+	 * @return topResult The top result
+	 */
 	public Resultable getTopResult() {
 		return topResult;
 	}
 
+	/** Set the top result
 	public void setTopResult(Resultable topResult) {
 		this.topResult = topResult;
 	}
