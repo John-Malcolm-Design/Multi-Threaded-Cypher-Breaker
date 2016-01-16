@@ -36,5 +36,6 @@ Application should be built via the build.xml ant file. Build phases below:
 - deploy (default): Compress classes and documentation into Zip and compressed tarball. (depends on docs)
 
 *Build and see generated Javadocs for more info on each class and method.*
+
 *REST package that allows for HTTP access is currently in development and will be added as a package*
-*Front end repository: https://github.com/johnmalcolm/Rail-Fence-Cypher-Website*
+*front end repository: https://github.com/johnmalcolm/Rail-Fence-Cypher-Website*
