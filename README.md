@@ -27,13 +27,13 @@ Rail Fence cypher, encryption, decryption and cypher breaking using multithreadi
 
 ##Building Application
 Application should be built via the build.xml ant file. Build phases below:
-- clean: Delete all generated classes and files. (depends on clean)
-- init: Creates dist folder for compiled code, jars and docs if it does not exist.
-- compile: Compile source code. This does not include test cases. (depends on init)
-- junit: Compile and run test cases. Prints reports for each test class to reports folder. (depends on compile)
-- archive: Create .jars for running application. (depends on junit passing)
-- docs: Generate Javadocs. (depends on archive)
-- deploy (default): Compress classes and documentation into Zip and compressed tarball. (depends on docs)
+- **clean:** Delete all generated classes and files. (depends on clean)
+- **init:** Creates dist folder for compiled code, jars and docs if it does not exist.
+- **compile**: Compile source code. This does not include test cases. (depends on init)
+- **junit**: Compile and run test cases. Prints reports for each test class to reports folder. (depends on compile)
+- **archive**: Create .jars for running application. (depends on junit passing)
+- **docs**: Generate Javadocs. (depends on archive)
+- **deploy (default)**: Compress classes and documentation into Zip and compressed tarball. (depends on docs)
 
 *Build and see generated Javadocs for more info on each class and method.*
 
