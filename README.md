@@ -10,7 +10,6 @@ RailFence cypher, encryption, decryption and cypher breaking using multithreadin
  - ie.gmit.sw.io: Input/output classes should be stored here, including network, user and file I/O.
  - ie.gmit.sw.result: Results based on n-gram scoring of decyphered text, ngram and text scoring classes.
  - ie.gmit.sw.uml: UML Diagram.
- 
 **test**
  - ie.gmit.sw.cryptography: Cryptography test cases.
  - ie.gmit.sw.io: IO test cases.
