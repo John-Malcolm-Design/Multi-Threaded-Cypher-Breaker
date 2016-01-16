@@ -37,5 +37,5 @@ Application should be built via the build.xml ant file. Build phases below:
 
 *Build and see generated Javadocs for more info on each class and method.*
 
-*REST package that allows for HTTP access is currently in development and will be added as a package*
-*front end repository: https://github.com/johnmalcolm/Rail-Fence-Cypher-Website*
+*JAX-RS based REST package that allows for HTTP access is currently in development and will be added as a package to the ie.gmit.sw.io package in version 2.0.*
+*Front end website repo: https://github.com/johnmalcolm/Rail-Fence-Cypher-Website*
