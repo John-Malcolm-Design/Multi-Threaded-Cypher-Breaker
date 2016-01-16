@@ -26,7 +26,7 @@ Rail Fence cypher, encryption, decryption and cypher breaking using multithreadi
  - UML: Object Aid
 
 ##Building Application
-Application should be run via the build.xml ant file. Build phases below:
+Application should be built via the build.xml ant file. Build phases below:
 - clean: Delete all generated classes and files. (depends on clean)
 - init: Creates dist folder for compiled code, jars and docs if it does not exist.
 - compile: Compile source code. This does not include test cases. (depends on init)
