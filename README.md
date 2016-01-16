@@ -3,6 +3,8 @@
 ##Synopsis
 RailFence cypher, encryption, decryption and cypher breaking using multithreading in Java. Utilizes the Java Collections & Concurrent APIs. JUnit is used to test every method in the application and Log4J has been added (not yet implemented) for a more robust logging system. This program uses a highly abstracted and loosly coupled style so as to create a more robust Object Orientated Program. 
 
+![alt tag](http://johnmalcolmdesign.com/design.png)
+
 ##Packages 
 **src/**
  - ie.gmit.sw: Application entry points and global classes.
